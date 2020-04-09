@@ -18,5 +18,5 @@ public class ConstantsBdd {
     public static final String CREATE_TABLE_SORTIES = "CREATE TABLE " + TABLE_SORTIES + " (" +
             COL_ID_SORTIE + " INTEGER PRIMARY KEY, " +
             COL_NOM_SORTIE + " TEXT NOT NULL, " +
-            COL_DESCRIPTION_SORTIE + "TEXT NOT NULL);";
+            COL_DESCRIPTION_SORTIE + " TEXT NOT NULL);";
 }

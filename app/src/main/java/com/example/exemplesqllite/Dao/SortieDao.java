@@ -1,8 +1,13 @@
 package com.example.exemplesqllite.Dao;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.exemplesqllite.Entities.Sortie;
+import com.example.exemplesqllite.Utilities.ConstantsBdd;
 
 import java.util.ArrayList;
 
@@ -13,8 +18,17 @@ public class SortieDao extends BaseDao implements InterfaceDao<Sortie> {
     }
 
     @Override
-    public void insert(Sortie entity) {
+    public void insert(Sortie sortie) {
+        try {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(ConstantsBdd.COL_ID_SORTIE, sortie.getIdSortie());
+            contentValues.put(ConstantsBdd.COL_NOM_SORTIE, sortie.getNom());
+            contentValues.put(ConstantsBdd.COL_DESCRIPTION_SORTIE, sortie.getDescription());
 
+            sqLiteDatabase.insert(ConstantsBdd.TABLE_SORTIES, null, contentValues);
+        } catch (Exception ex) {
+            Log.e("Erreur insert bdd", ex.getMessage());
+        }
     }
 
     @Override
@@ -29,7 +43,35 @@ public class SortieDao extends BaseDao implements InterfaceDao<Sortie> {
 
     @Override
     public Sortie get(int id) {
-        return null;
+        Cursor c = sqLiteDatabase.query(
+                ConstantsBdd.TABLE_SORTIES,
+                new String[]{
+                        ConstantsBdd.COL_ID_SORTIE,
+                        ConstantsBdd.COL_NOM_SORTIE,
+                        ConstantsBdd.COL_DESCRIPTION_SORTIE
+                },
+                ConstantsBdd.COL_ID_SORTIE + " = " + id,
+                null,
+                null,
+                null,
+                ConstantsBdd.COL_NOM_SORTIE);
+
+        return cursorToSortie(c);
+    }
+
+    private Sortie cursorToSortie(Cursor c) {
+
+        c.moveToFirst();
+        Sortie sortie = null;
+
+        if (c.getCount() > 0) {
+            sortie = new Sortie();
+            sortie.setIdSortie(c.getInt(ConstantsBdd.NUM_COL_ID_SORTIE));
+            sortie.setNom(c.getString(ConstantsBdd.NUM_COL_NOM_SORTIE));
+            sortie.setDescription(c.getString(ConstantsBdd.NUM_COL_DESCRIPTION_SORTIE));
+            c.close();
+        }
+        return sortie;
     }
 
     @Override
