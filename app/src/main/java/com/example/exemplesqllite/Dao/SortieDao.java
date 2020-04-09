@@ -9,8 +9,6 @@ import com.example.exemplesqllite.Entities.Sortie;
 import com.example.exemplesqllite.Entities.Sorties;
 import com.example.exemplesqllite.Utilities.ConstantsBdd;
 
-import java.util.ArrayList;
-
 public class SortieDao extends BaseDao implements InterfaceDao<Sortie> {
 
     public SortieDao(Context context) {
@@ -78,7 +76,7 @@ public class SortieDao extends BaseDao implements InterfaceDao<Sortie> {
     }
 
     @Override
-    public ArrayList<Sortie> getAll() {
+    public Sorties getAll() {
         Cursor c = sqLiteDatabase.query(
                 ConstantsBdd.TABLE_SORTIES,
                 new String[]{
