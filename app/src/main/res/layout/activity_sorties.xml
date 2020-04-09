@@ -5,16 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".SortiesActivity">
 
-    <Button
-        android:id="@+id/btnSorties"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="load sorties from SW" />
-
-    <ListView
-        android:id="@+id/lswSorties"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcwSorties"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

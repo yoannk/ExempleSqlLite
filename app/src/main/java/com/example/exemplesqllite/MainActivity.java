@@ -3,8 +3,11 @@ package com.example.exemplesqllite;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.exemplesqllite.Dao.SortieDao;
@@ -26,28 +29,7 @@ public class MainActivity extends AppCompatActivity {
         ListView lswSorties = findViewById(R.id.lswSorties);
 
         SortieDao sortieDao = new SortieDao(context);
-
         sortieDao.openForWrite();
-
-        Sortie sortie1 = new Sortie();
-        sortie1.setIdSortie(1);
-        sortie1.setNom("Sortie équitation");
-        sortie1.setDescription("Sortie apprentissage de l'équitation");
-
-        Sortie sortie2 = new Sortie();
-        sortie2.setIdSortie(2);
-        sortie2.setNom("Sortie bowling");
-        sortie2.setDescription("Sortie apprentissage du bowling");
-
-        Sortie sortie3 = new Sortie();
-        sortie3.setIdSortie(3);
-        sortie3.setNom("Sortie randonnée");
-        sortie3.setDescription("Sortie apprentissage de la randonnée");
-
-        sortieDao.insert(sortie1);
-        sortieDao.insert(sortie2);
-        sortieDao.insert(sortie3);
-
 
         // Je récupère la liste des sorties
         Sorties sorties = sortieDao.getAll();
@@ -61,5 +43,14 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, nomSorties);
         lswSorties.setAdapter(adapter);
+
+        Button btnSorties = findViewById(R.id.btnSorties);
+        btnSorties.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, SortiesActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
