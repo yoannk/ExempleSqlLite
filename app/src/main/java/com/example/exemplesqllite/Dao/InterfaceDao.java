@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public interface InterfaceDao<T> {
     void insert(T entity);
-    void update(T entity);
-    void delete(int id);
+    int update(T entity);
+    int delete(int id);
     T get(int id);
     ArrayList<T> getAll();
 }

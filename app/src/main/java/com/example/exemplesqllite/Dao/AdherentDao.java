@@ -5,19 +5,20 @@ import com.example.exemplesqllite.Entities.Adherent;
 import java.util.ArrayList;
 
 public class AdherentDao implements InterfaceDao<Adherent> {
+
     @Override
     public void insert(Adherent entity) {
 
     }
 
     @Override
-    public void update(Adherent entity) {
-
+    public int update(Adherent entity) {
+        return 0;
     }
 
     @Override
-    public void delete(int id) {
-
+    public int delete(int id) {
+        return 0;
     }
 
     @Override
